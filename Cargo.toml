@@ -1,5 +1,5 @@
 [package]
-name = "log4s-mqtt"
+name = "log4rs-mqtt"
 description = "MQTT appender for log4rs based on paho MQTT"
 version = "1.0.0"
 authors = ["Trevor R.H. Clarke <retrev@csh.rit.edu>"]
