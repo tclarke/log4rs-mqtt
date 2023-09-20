@@ -1,0 +1,27 @@
+[package]
+name = "log4s-mqtt"
+description = "MQTT appender for log4rs based on paho MQTT"
+version = "1.0.0"
+authors = ["Trevor R.H. Clarke <retrev@csh.rit.edu>"]
+license = "MIT/Apache-2.0"
+keywords = ["logger", "log", "logging", "mqtt"]
+publish = true
+repository = "https://github.com/tclarke/log4rs-mqtt"
+documentation = "https://docs.rs/crate/log4rs-mqtt"
+readme = "README.md"
+
+[features]
+default = ["config_parsing"]
+config_parsing = ["log4rs/config_parsing", "log/serde", "serde", "serde_derive"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.75"
+async-std = "1.12.0"
+derivative = "2.2.0"
+log = "0.4.20"
+log4rs = { version = "1.2" }
+paho-mqtt = { version = "0.12", default-features = false, features = ["bundled", "build_bindgen"] }
+serde = { version = "1.0", optional = true }
+serde_derive = {version = "1.0", optional = true }
