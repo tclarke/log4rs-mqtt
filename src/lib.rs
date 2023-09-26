@@ -84,7 +84,7 @@ impl Append for MqttAppender {
         let message = mqtt::MessageBuilder::new()
             .topic(self.topic.as_str())
             .qos(self.qos)
-            .payload(payload.strip_suffix("\n").unwrap())
+            .payload(payload.strip_suffix('\n').unwrap())
             .finalize();
         block_on(self.mqtt.publish(message))?;
         Ok(())
@@ -167,8 +167,8 @@ impl MqttAppenderBuilder {
 
         MqttAppender {
             topic: self.topic.unwrap_or_else(|| "logging".to_string()),
-            qos: self.qos.unwrap_or_else(|| 0),
-            encoder: self.encoder.unwrap_or_else(|| Box::new(PatternEncoder::default())),
+            qos: self.qos.unwrap_or(0),
+            encoder: self.encoder.unwrap_or_else(|| Box::<PatternEncoder>::default()),
             mqtt: mqtt_client,
         }
     }
@@ -220,7 +220,7 @@ impl Deserialize for MqttAppenderDeserializer {
             appender = appender.mqtt_server(mqtt_server.as_str());
         }
         if let Some(mqtt_client_id) = config.mqtt_client_id {
-            appender = appender.mqtt_client_id(&mqtt_client_id.as_str());
+            appender = appender.mqtt_client_id(mqtt_client_id.as_str());
         }
         Ok(Box::new(appender.build()))
     }
